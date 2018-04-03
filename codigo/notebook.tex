@@ -1,0 +1,1180 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Laboratorio1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{redes-y-transmisiuxf3n-de-datos---laboratorio-1}{%
+\section{Redes y Transmisión de Datos - Laboratorio
+1}\label{redes-y-transmisiuxf3n-de-datos---laboratorio-1}}
+
+    \hypertarget{interacciones-http-buxe1sicas}{%
+\subsection{Interacciones HTTP
+Básicas}\label{interacciones-http-buxe1sicas}}
+
+    Para este ejercicio se usa el archivo:
+\texttt{interacciones\_basicas.pcapng}
+
+    \hypertarget{a.-quuxe9-versiuxf3n-de-http-emplea-su-navegador}{%
+\subsubsection{1a. ¿Qué versión de HTTP emplea su
+navegador?}\label{a.-quuxe9-versiuxf3n-de-http-emplea-su-navegador}}
+
+Utiliza HTTP 1.1
+
+\hypertarget{b.-quuxe9-versiuxf3n-de-http-ejecuta-el-servidor}{%
+\subsubsection{1b. ¿Qué versión de HTTP ejecuta el
+servidor?}\label{b.-quuxe9-versiuxf3n-de-http-ejecuta-el-servidor}}
+
+HTTP 1.1
+
+\hypertarget{a.-quuxe9-idiomas-indica-su-navegador-al-servidor-que-estuxe1-dispuesto-aceptar-en-la-respuesta}{%
+\subsubsection{2a. ¿Qué idiomas indica su navegador al servidor que está
+dispuesto aceptar en la
+respuesta?}\label{a.-quuxe9-idiomas-indica-su-navegador-al-servidor-que-estuxe1-dispuesto-aceptar-en-la-respuesta}}
+
+es-US y en
+
+\hypertarget{b.-quuxe9-relaciuxf3n-tiene-esta-informaciuxf3n-con-el-lenguaje-que-emplea-en-su-navegador-y-sistema-operativo}{%
+\subsubsection{2b. ¿Qué relación tiene esta información con el lenguaje
+que emplea en su navegador y sistema
+operativo?}\label{b.-quuxe9-relaciuxf3n-tiene-esta-informaciuxf3n-con-el-lenguaje-que-emplea-en-su-navegador-y-sistema-operativo}}
+
+Es el lenguaje en el cuál se encuentra mi navegador y Sistema Operativo
+
+\hypertarget{a.-cuuxe1l-es-la-direcciuxf3n-ip-de-su-ordenador}{%
+\subsubsection{3a. ¿Cuál es la dirección IP de su
+ordenador?}\label{a.-cuuxe1l-es-la-direcciuxf3n-ip-de-su-ordenador}}
+
+192.168.88.6
+
+\hypertarget{b.-y-del-servidor-web-al-que-estuxe1-accediendo}{%
+\subsubsection{3b. ¿Y del servidor Web al que está
+accediendo}\label{b.-y-del-servidor-web-al-que-estuxe1-accediendo}}
+
+174.138.32.232
+
+\hypertarget{a.-cuuxe1l-es-el-cuxf3digo-de-estado-devuelto-a-su-navegador-por-el-servidor}{%
+\subsubsection{4a. ¿Cuál es el código de estado devuelto a su navegador
+por el
+servidor?}\label{a.-cuuxe1l-es-el-cuxf3digo-de-estado-devuelto-a-su-navegador-por-el-servidor}}
+
+200 OK
+
+\hypertarget{b.-cuuxe1l-es-el-significado-de-ese-cuxf3digo-de-estado}{%
+\subsubsection{4b. ¿Cuál es el significado de ese código de
+estado?}\label{b.-cuuxe1l-es-el-significado-de-ese-cuxf3digo-de-estado}}
+
+Es una respuesta standard para peticiones correctas
+
+\hypertarget{cuuxe1ndo-fue-modificado-por-uxfaltima-vez-el-fichero-html-que-el-servidor-te-estuxe1-devolviendo}{%
+\subsubsection{5. ¿Cuándo fue modificado por última vez el fichero HTML
+que el servidor te está
+devolviendo?}\label{cuuxe1ndo-fue-modificado-por-uxfaltima-vez-el-fichero-html-que-el-servidor-te-estuxe1-devolviendo}}
+
+15 de Marzo de 2017
+
+    \hypertarget{interacciones-http-condicionales}{%
+\subsection{Interacciones HTTP
+Condicionales}\label{interacciones-http-condicionales}}
+
+    Para estos puntos se utiliza la captura:
+\texttt{interacciones\_condicionales.pcapng}
+
+    \hypertarget{inspeccione-los-contenidos-de-la-primera-peticiuxf3n-get-de-su-navegador-hacia-el-servidor.-observa-alguna-linea-if-modified-since-en-la-peticiuxf3n-get-indique-el-contenido-de-dicha-luxednea.}{%
+\subsubsection{8. Inspeccione los contenidos de la primera petición GET
+de su navegador hacia el servidor. ¿Observa alguna linea
+`If-Modified-Since' en la petición GET? Indique el contenido de dicha
+línea.}\label{inspeccione-los-contenidos-de-la-primera-peticiuxf3n-get-de-su-navegador-hacia-el-servidor.-observa-alguna-linea-if-modified-since-en-la-peticiuxf3n-get-indique-el-contenido-de-dicha-luxednea.}}
+
+No se encuentra línea que contenga `If-Modified-Since' en la primera
+petición.
+
+\hypertarget{analice-el-contenido-de-la-respuesta-del-servidor.-contiene-dicha-respuesta-el-fichero-html-que-se-peduxeda}{%
+\subsubsection{9. Analice el contenido de la respuesta del servidor.
+¿Contiene dicha respuesta el fichero HTML que se
+pedía?}\label{analice-el-contenido-de-la-respuesta-del-servidor.-contiene-dicha-respuesta-el-fichero-html-que-se-peduxeda}}
+
+Sí, contiene el fichero pedido
+
+\hypertarget{ahora-analice-el-contenido-de-la-segunda-peticiuxf3n-get-desde-su-navegador-al-servidor.-ve-alguna-luxednea-if-modified-since-en-dicha-peticiuxf3n-si-es-asuxed-quuxe9-informaciuxf3n-aparece-a-continuaciuxf3n-de-dicha-cabecera}{%
+\subsubsection{10. Ahora analice el contenido de la segunda petición GET
+desde su navegador al servidor. ¿Ve alguna línea `If-Modified-Since' en
+dicha petición? Si es así, ¿qué información aparece a continuación de
+dicha
+cabecera?}\label{ahora-analice-el-contenido-de-la-segunda-peticiuxf3n-get-desde-su-navegador-al-servidor.-ve-alguna-luxednea-if-modified-since-en-dicha-peticiuxf3n-si-es-asuxed-quuxe9-informaciuxf3n-aparece-a-continuaciuxf3n-de-dicha-cabecera}}
+
+En cambio en la segunda petición dicha linea dice
+
+\texttt{If-Modified-Since:\ Wed,\ 15\ Mar\ 2017\ 20:49:17\ GMT\textbackslash{}r\textbackslash{}n}
+
+\hypertarget{cuuxe1l-es-el-cuxf3digo-de-estado-http-y-el-mensaje-devuelto-por-el-servidor-en-respuesta-a-este-segundo-get-devuelve-el-servidor-expluxedcitamente-el-contenido-del-fichero-explique-quuxe9-ha-sucedido}{%
+\subsubsection{11. ¿Cuál es el código de estado HTTP y el mensaje
+devuelto por el servidor en respuesta a este segundo GET? ¿Devuelve el
+servidor explícitamente el contenido del fichero? Explique qué ha
+sucedido}\label{cuuxe1l-es-el-cuxf3digo-de-estado-http-y-el-mensaje-devuelto-por-el-servidor-en-respuesta-a-este-segundo-get-devuelve-el-servidor-expluxedcitamente-el-contenido-del-fichero-explique-quuxe9-ha-sucedido}}
+
+El código de estado devuelto es el 304 con el mensaje
+\texttt{Not\ Modified}
+
+El servidor no devuelve explícitamente el archivo. Lo que sucede es que
+el nevegador ya tiene en caché el archivo de la primera petición GET
+realizada. Cuando se realiza la segunda, el navegador pregunta si el
+archivo se modificó desde la última vez, utilizando la cabecera
+\texttt{If-Modified-Since}. Como no se modificó, el servidor devuelve
+ese 304
+
+    \hypertarget{descarga-de-archivos-grandes}{%
+\subsection{Descarga de Archivos
+Grandes}\label{descarga-de-archivos-grandes}}
+
+    Se utiliza el archivo: \texttt{descarga\_documentos\_grandes.pcapng}
+
+    \hypertarget{cuuxe1ntos-mensajes-de-peticiuxf3n-get-han-sido-enviados-por-el-navegador}{%
+\subsubsection{12. ¿Cuántos mensajes de petición GET han sido enviados
+por el
+navegador?}\label{cuuxe1ntos-mensajes-de-peticiuxf3n-get-han-sido-enviados-por-el-navegador}}
+
+Uno solo
+
+\hypertarget{cuuxe1ntos-segmentos-tcp-con-datos-han-sido-necesarios-para-una-uxfanica-respuesta-http}{%
+\subsubsection{13. ¿Cuántos segmentos TCP con datos han sido necesarios
+para una única respuesta
+HTTP?}\label{cuuxe1ntos-segmentos-tcp-con-datos-han-sido-necesarios-para-una-uxfanica-respuesta-http}}
+
+Según el siguiente fragmento de la captura
+
+\texttt{{[}8\ Reassembled\ TCP\ Segments\ (17814\ bytes):\ \#171(241),\ \#262(2800),\ \#294(1400),\ \#342(2800),\ \#345(4200),\ \#356(1400),\ \#358(4200),\ \#360(773){]}}
+
+fueron 8 segmentos
+
+\hypertarget{cuuxe1l-es-el-cuxf3digo-de-estado-y-el-mensaje-asociado-con-la-respuesta-a-la-peticiuxf3n-get}{%
+\subsubsection{14. ¿Cuál es el código de estado y el mensaje asociado
+con la respuesta a la petición
+GET?}\label{cuuxe1l-es-el-cuxf3digo-de-estado-y-el-mensaje-asociado-con-la-respuesta-a-la-peticiuxf3n-get}}
+
+La respuesta fue un 200 OK
+
+    \hypertarget{documentos-html-con-objetos-empotrados}{%
+\subsection{Documentos HTML con objetos
+empotrados}\label{documentos-html-con-objetos-empotrados}}
+
+    Captura: \texttt{objetos\_empotrados.pcapng}
+
+NOTA: Debido a problemas con la descarga de los GIF. Esta parte del
+laboratorio la hice en local utilizando
+\href{https://github.com/D3f0/unp-rtd-tp1}{este repo} con gifs que tenía
+en mi computadora. En particular, estos dos
+
+\begin{figure}
+\centering
+\includegraphics{funny-cat-gif-3.gif}
+\caption{nope}
+\end{figure}
+
+\includegraphics{The_Mathematics_of_Winning_Monopoly.gif}
+
+    \hypertarget{cuuxe1ntos-mensajes-get-ha-enviado-el-navegador-a-quuxe9-direcciones-se-han-enviado-esos-mensajes}{%
+\subsubsection{15. ¿Cuántos mensajes GET ha enviado el navegador? ¿A qué
+direcciones se han enviado esos
+mensajes?}\label{cuuxe1ntos-mensajes-get-ha-enviado-el-navegador-a-quuxe9-direcciones-se-han-enviado-esos-mensajes}}
+
+El navegador envió 3 peticiones GET, 1 para el texto de la página y 1
+más por cada GIF.
+
+Las 3 fueron realizadas a la IP de la página
+
+\hypertarget{puede-determinar-si-las-imuxe1genes-han-sido-descargadas-sucesivamente-se-pide-una-imagen-se-descarga-y-despuuxe9s-se-pide-la-otra-o-en-paralelo-se-lanzan-las-dos-descargas-de-forma-simultuxe1nea}{%
+\subsubsection{16. ¿Puede determinar si las imágenes han sido
+descargadas sucesivamente (se pide una imagen, se descarga y después se
+pide la otra) o en paralelo (se lanzan las dos descargas de forma
+simultánea?}\label{puede-determinar-si-las-imuxe1genes-han-sido-descargadas-sucesivamente-se-pide-una-imagen-se-descarga-y-despuuxe9s-se-pide-la-otra-o-en-paralelo-se-lanzan-las-dos-descargas-de-forma-simultuxe1nea}}
+
+En paralelo, porque no se esperó a que se descargara el primer GIF para
+lanzar la descarga del segundo.
+
+    \hypertarget{autenticaciuxf3n-http}{%
+\subsection{Autenticación HTTP}\label{autenticaciuxf3n-http}}
+
+    \hypertarget{cuuxe1l-es-el-cuxf3digo-de-respuesta-y-el-mensaje-del-servidor-en-respuesta-al-mensaje-get-inicial-de-su-navegador}{%
+\subsubsection{17. ¿Cuál es el código de respuesta y el mensaje del
+servidor en respuesta al mensaje GET inicial de su
+navegador?}\label{cuuxe1l-es-el-cuxf3digo-de-respuesta-y-el-mensaje-del-servidor-en-respuesta-al-mensaje-get-inicial-de-su-navegador}}
+
+El servidor, inicialmente, devuelve el código 401 con el mensaje
+\texttt{Not\ authorized}
+
+\hypertarget{cuando-su-navegador-envuxeda-el-mensaje-http-get-por-segunda-vez-quuxe9-nuevo-campo-se-incluye-en-el-mensaje-get}{%
+\subsubsection{18. Cuando su navegador envía el mensaje HTTP GET por
+segunda vez, ¿qué nuevo campo se incluye en el mensaje
+GET?}\label{cuando-su-navegador-envuxeda-el-mensaje-http-get-por-segunda-vez-quuxe9-nuevo-campo-se-incluye-en-el-mensaje-get}}
+
+Se incluye el campo authorization junto con las credenciales provsitas
+por el usuario
+
+\begin{verbatim}
+Authorization: Basic d2lyZXNoYXJrOm5ldHdvcms=\r\n
+   Credentials: wireshark:network
+\end{verbatim}
+
+\hypertarget{explique-la-codificaciuxf3n-base64.}{%
+\subsubsection{19. Explique la codificación
+Base64.}\label{explique-la-codificaciuxf3n-base64.}}
+
+La codificación Base64 es una codifiación utilizada para codificar datos
+representados en formato binario que necesita ser almacenada y enviada a
+través de medios que manejan data textual. De esta forma se asegura que
+los datos permanecen intactos durante el transporte.
+
+Esta codificación toma los datos en binarios y los escribe en formato de
+base64 utilizando los caracteres de A-Z, a-z y 0-9 para los primeros 62
+caracteres, dejando a criterio de los usuarios del código los otros dos
+caracteres restantes.
+
+Volviendo al punto anterior donde dice:
+\texttt{Authorization:\ Basic\ d2lyZXNoYXJrOm5ldHdvcms=\textbackslash{}r\textbackslash{}n}
+el fragmento \texttt{d2lyZXNoYXJrOm5ldHdvcms}, decodificado desde Base64
+quiere decir \texttt{wireshark:network}
+
+    \hypertarget{telnet-al-puerto-80}{%
+\subsection{Telnet al puerto 80}\label{telnet-al-puerto-80}}
+
+    \hypertarget{quuxe9-mensaje-recibes-como-respuesta}{%
+\subsubsection{¿Qué mensaje recibes como
+respuesta?}\label{quuxe9-mensaje-recibes-como-respuesta}}
+
+El servidor me responde con un 405, indicando que la petición que envié
+no está permitida
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{HTTP/1.0 501 Unsupported method ('JET')}
+\NormalTok{Server: SimpleHTTP/0.6 Python/3.5.2}
+\NormalTok{Date: Tue, 27 Mar 2018 22:33:30 GMT}
+\NormalTok{Connection: close}
+\NormalTok{Content-Type: text/html;charset=utf-8}
+\NormalTok{Content-Length: 496}
+
+\DataTypeTok{<!DOCTYPE }\NormalTok{HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"}
+\NormalTok{        "http://www.w3.org/TR/html4/strict.dtd"}\DataTypeTok{>}
+\KeywordTok{<html>}
+    \KeywordTok{<head>}
+        \KeywordTok{<meta}\OtherTok{ http-equiv=}\StringTok{"Content-Type"}\OtherTok{ content=}\StringTok{"text/html;charset=utf-8"}\KeywordTok{>}
+        \KeywordTok{<title>}\NormalTok{Error response}\KeywordTok{</title>}
+    \KeywordTok{</head>}
+    \KeywordTok{<body>}
+        \KeywordTok{<h1>}\NormalTok{Error response}\KeywordTok{</h1>}
+        \KeywordTok{<p>}\NormalTok{Error code: 501}\KeywordTok{</p>}
+        \KeywordTok{<p>}\NormalTok{Message: Unsupported method ('JET').}\KeywordTok{</p>}
+        \KeywordTok{<p>}\NormalTok{Error code explanation: HTTPStatus.NOT_IMPLEMENTED - Server does not support this operation.}\KeywordTok{</p>}
+    \KeywordTok{</body>}
+\KeywordTok{</html>}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{quuxe9-mensaje-recibes-como-respuesta-ahora}{%
+\subsubsection{¿Qué mensaje recibes como respuesta
+ahora?}\label{quuxe9-mensaje-recibes-como-respuesta-ahora}}
+
+Recibo un 404, indicando que la página que solicité no se encontró
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{HTTP/1.0 404 File not found}
+\NormalTok{Server: SimpleHTTP/0.6 Python/3.5.2}
+\NormalTok{Date: Tue, 27 Mar 2018 22:34:29 GMT}
+\NormalTok{Connection: close}
+\NormalTok{Content-Type: text/html;charset=utf-8}
+\NormalTok{Content-Length: 469}
+
+\DataTypeTok{<!DOCTYPE }\NormalTok{HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"}
+\NormalTok{        "http://www.w3.org/TR/html4/strict.dtd"}\DataTypeTok{>}
+\KeywordTok{<html>}
+    \KeywordTok{<head>}
+        \KeywordTok{<meta}\OtherTok{ http-equiv=}\StringTok{"Content-Type"}\OtherTok{ content=}\StringTok{"text/html;charset=utf-8"}\KeywordTok{>}
+        \KeywordTok{<title>}\NormalTok{Error response}\KeywordTok{</title>}
+    \KeywordTok{</head>}
+    \KeywordTok{<body>}
+        \KeywordTok{<h1>}\NormalTok{Error response}\KeywordTok{</h1>}
+        \KeywordTok{<p>}\NormalTok{Error code: 404}\KeywordTok{</p>}
+        \KeywordTok{<p>}\NormalTok{Message: File not found.}\KeywordTok{</p>}
+        \KeywordTok{<p>}\NormalTok{Error code explanation: HTTPStatus.NOT_FOUND - Nothing matches the given URI.}\KeywordTok{</p>}
+    \KeywordTok{</body>}
+\KeywordTok{</html>}
+\end{Highlighting}
+\end{Shaded}
+
+    \hypertarget{utilidades-de-luxednea-de-comandos.}{%
+\subsection{Utilidades de línea de
+comandos.}\label{utilidades-de-luxednea-de-comandos.}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Ejecutar nc en modo conexión con el puerto 80 de un servidor web
+  accesible.
+
+  \texttt{\$\ nc\ 174.138.32.232\ 80}
+\item
+  Escribir la siguiente petición.
+
+  \texttt{GET\ /index.html\ HTTP/1.1}
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PYZpc{}\PYZpc{}bash
+        \PY{n+nb}{echo} \PYZhy{}e \PY{l+s+s2}{\PYZdq{}GET /index.html HTTP/1.1\PYZbs{}r\PYZbs{}nHost:174.138.32.232\PYZbs{}r\PYZbs{}n\PYZbs{}r\PYZbs{}n\PYZdq{}} \PY{p}{|} nc \PY{l+m}{174}.138.32.232 \PY{l+m}{80}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+HTTP/1.1 200 OK
+Server: nginx/1.13.9
+Date: Wed, 28 Mar 2018 19:40:16 GMT
+Content-Type: text/html
+Content-Length: 634
+Last-Modified: Tue, 27 Mar 2018 14:25:39 GMT
+Connection: keep-alive
+ETag: "5aba5463-27a"
+Accept-Ranges: bytes
+
+<html>
+
+<head>
+    <title>Redes y Tranmisión de Datos</title>
+    <meta charset="utf-8">
+
+</head>
+
+<body>
+    <h1>Redes y Transmisión de Datos</h1>
+    <h3>Archivos</h3>
+    <ul>
+        <li><a href="HTTP-wireshark-file1.html">HTTP-wireshark-file1</a></li>
+        <li><a href="HTTP-wireshark-file2.html">HTTP-wireshark-file2</a></li>
+        <li><a href="HTTP-wireshark-file3.html">HTTP-wireshark-file3</a></li>
+        <li><a href="HTTP-wireshark-file4.html">HTTP-wireshark-file4</a></li>
+        <li><a href="protected\_pages/HTTP-wireshark-file5.html">protected\_pages/HTTP-wireshark-file5.html</a></li>
+    </ul>
+</body>
+
+</html>
+    \end{Verbatim}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Ejecutar nc en modo escucha en el puerto 8080.
+
+  \texttt{\$\ nc\ -l\ -p\ 8080}
+\item
+  Desde un navegador web escribir http://localhost:8080/index.html
+\item
+  Responder a la petición desde nc.
+\end{enumerate}
+
+\begin{verbatim}
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 51
+
+<html><body> hola <img src="1.gif"> </body> </html>
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Salida del comando \texttt{ncat\ -k\ -l\ -p\ 8080}
+
+\begin{verbatim}
+GET / HTTP/1.1
+Host: localhost:8080
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:59.0) Gecko/20100101 Firefox/59.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Cookie: csrftoken=Gs4gFTvEVx4aHMirVg78CILiKSDdtbG7OGVdSAhSaOJ82Ux66xfLg9n20WJ0dhri; username-localhost-8888="2|1:0|10:1522190947|23:username-localhost-8888|44:NjQxNjcyODY1MjE4NGYzOGI2ODQ2MTA0NDhmMjgwOTc=|541fd4d1e8836fbbcd93f4a0c4ec0e84ad4c54338f6eb79bad4d235dcc5ae1f8"; _xsrf=2|06c4f5c5|0aa5cf9cf650c47abc273fab25272125|1519948517; username-localhost-8889="2|1:0|10:1519999438|23:username-localhost-8889|44:ZDU3YzE5YjMzZGQ3NDljM2JmNTJmODJmYjZkODVkYmI=|bb5400743a5867b45c2dfa99852c9eac13d20d0e588218d6bdd78e8a355f8766"; sessionid=p04s38moievrc93f8itebtcsw4a5ikc4
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+If-None-Match: W/"415-qBwd/5Yj71dXTq1x0e7Tb+FrX8w"
+Cache-Control: max-age=0
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 51
+
+<html><body> hola <img src="1.gif"> </body> </html>
+GET /1.gif HTTP/1.1
+Host: localhost:8080
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:59.0) Gecko/20100101 Firefox/59.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://localhost:8080/
+Cookie: csrftoken=Gs4gFTvEVx4aHMirVg78CILiKSDdtbG7OGVdSAhSaOJ82Ux66xfLg9n20WJ0dhri; username-localhost-8888="2|1:0|10:1522190953|23:username-localhost-8888|44:MjQ4NDNkMWMxNGQxNGZiYmJmNmU1NzlmN2RjYWE5MmY=|fa72835fdc417ea97c5ff89a5756e289cb6f835bb501f5343153a5faf3d0aece"; _xsrf=2|06c4f5c5|0aa5cf9cf650c47abc273fab25272125|1519948517; username-localhost-8889="2|1:0|10:1519999438|23:username-localhost-8889|44:ZDU3YzE5YjMzZGQ3NDljM2JmNTJmODJmYjZkODVkYmI=|bb5400743a5867b45c2dfa99852c9eac13d20d0e588218d6bdd78e8a355f8766"; sessionid=p04s38moievrc93f8itebtcsw4a5ikc4
+Connection: keep-alive
+\end{verbatim}
+
+    \hypertarget{realizar-otra-peticiuxf3n-desde-el-navegador-recargar-puxe1gina-y-enviarle-una-nueva-respuesta-desde-nc}{%
+\subsubsection{Realizar otra petición desde el navegador (recargar
+página) y enviarle una nueva respuesta desde
+nc}\label{realizar-otra-peticiuxf3n-desde-el-navegador-recargar-puxe1gina-y-enviarle-una-nueva-respuesta-desde-nc}}
+
+\begin{verbatim}
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 70
+
+<html><body> hola <a href="principal.html"> enlace </a> </body> </html>
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Salida de ncat -k -l -p 8080
+
+\begin{verbatim}
+GET / HTTP/1.1
+Host: localhost:8080
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:59.0) Gecko/20100101 Firefox/59.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Cookie: csrftoken=Gs4gFTvEVx4aHMirVg78CILiKSDdtbG7OGVdSAhSaOJ82Ux66xfLg9n20WJ0dhri; username-localhost-8888="2|1:0|10:1522266350|23:username-localhost-8888|44:MmFjMjRlMzhhYjJkNGVmNjhjZjczMmI3MzNlMjZiOTA=|a804c78b4d1aef8a0d81574d1a199fb24ee5cdb33cfc3b19a17e221df844d1c5"; _xsrf=2|06c4f5c5|0aa5cf9cf650c47abc273fab25272125|1519948517; username-localhost-8889="2|1:0|10:1519999438|23:username-localhost-8889|44:ZDU3YzE5YjMzZGQ3NDljM2JmNTJmODJmYjZkODVkYmI=|bb5400743a5867b45c2dfa99852c9eac13d20d0e588218d6bdd78e8a355f8766"; sessionid=p04s38moievrc93f8itebtcsw4a5ikc4
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+Cache-Control: max-age=0
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 70
+
+<html><body> hola <a href="principal.html"> enlace </a> </body> </html>
+
+GET /principal.html HTTP/1.1
+Host: localhost:8080
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:59.0) Gecko/20100101 Firefox/59.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://localhost:8080/
+Cookie: csrftoken=Gs4gFTvEVx4aHMirVg78CILiKSDdtbG7OGVdSAhSaOJ82Ux66xfLg9n20WJ0dhri; username-localhost-8888="2|1:0|10:1522266353|23:username-localhost-8888|44:OTIxZjhkMzliOTAzNDM3OTgwMWM0ZTY5NTExODFjNmE=|c58772596c3b40ca4ca08ad1801d4ea7df1eebfe609cf6f66a8d6b15c47281ef"; _xsrf=2|06c4f5c5|0aa5cf9cf650c47abc273fab25272125|1519948517; username-localhost-8889="2|1:0|10:1519999438|23:username-localhost-8889|44:ZDU3YzE5YjMzZGQ3NDljM2JmNTJmODJmYjZkODVkYmI=|bb5400743a5867b45c2dfa99852c9eac13d20d0e588218d6bdd78e8a355f8766"; sessionid=p04s38moievrc93f8itebtcsw4a5ikc4
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+\end{verbatim}
+
+    \hypertarget{conectar-con-un-servidor-smtp-puerto-25}{%
+\subsubsection{Conectar con un servidor SMTP (puerto
+25)}\label{conectar-con-un-servidor-smtp-puerto-25}}
+
+\begin{verbatim}
+telnet 174.138.32.232 2500
+Trying 174.138.32.232...
+Connected to 174.138.32.232.
+Escape character is '^]'.
+220 76162c14146d NO UCE NO UBE NO RELAY PROBES ESMTP
+HELO pablo
+250 76162c14146d Hello 190.172.100.239, nice to meet you
+MAIL FROM: pablo@pablo.com
+250 Sender address accepted
+RCPT TO: pablo@localhost 
+250 Recipient address accepted
+DATA
+354 Continue
+Subject: Un email en rtd
+Este es un mail, disfrutelo al mejor
+nivel
+.
+250 Delivery in progress
+QUIT
+221 See you later
+Connection closed by foreign host.
+\end{verbatim}
+
+\hypertarget{conectar-con-un-servidor-pop3-puerto-110}{%
+\subsubsection{Conectar con un servidor POP3 (puerto
+110)}\label{conectar-con-un-servidor-pop3-puerto-110}}
+
+\begin{verbatim}
+Trying 174.138.32.232...
+Connected to 174.138.32.232.
+Escape character is '^]'.
++OK <20180328200253.1.1598239824.8@76162c14146d>
+USER pablo@localhost
++OK USER accepted, send PASS
+PASS pablo@localhost
++OK Authentication succeeded
+STAT
++OK 2 300
+RETR 1
++OK 152
+Received: from pablo by 172.18.0.3 with ESMTP ; Wed, 28 Mar 2018 19:53:15 +0000
+Subject: email en rtd
+Este es un mail, disfrutelo
+al mejor nivel.
+QUIT
+
+.
+STAT
++OK 2 300
+RETR 2
++OK 148
+Received: from pablo by 172.18.0.3 with ESMTP ; Wed, 28 Mar 2018 19:55:42 +0000
+Subject: Un email en rtd
+Este es un mail, disfrutelo al mejor
+nivel
+.
+QUIT
++OK 
+Connection closed by foreign host.
+\end{verbatim}
+
+    \hypertarget{parte-2-programaciuxf3n-cliente-servidor-utilizando-la-interfaz-sockets.}{%
+\subsection{Parte 2: Programación Cliente / Servidor utilizando la
+interfaz
+sockets.}\label{parte-2-programaciuxf3n-cliente-servidor-utilizando-la-interfaz-sockets.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{writefile} servidor.c
+         /* PrimerServidorTCP.c
+         Servicio: Las cadenas de texto recibidas de un Cliente son enviadas a la salida estándar.
+         Nota: Por simplicidad del código no se realiza ningún tipo de control de errores. No obstante
+         el servidor es totalmente funcional.
+         */
+         \PYZsh{}include \PYZlt{}sys/types.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}sys/socket.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}netinet/in.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}unistd.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}string.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}stdlib.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}stdio.h\PYZgt{}
+         \PYZsh{}define PORTNUMBER 12345
+         int main(void)\PYZob{}
+             char buf[10];
+             int s, n, ns, len;
+             struct sockaddr\PYZus{}in direcc;
+         
+             s = socket(AF\PYZus{}INET, SOCK\PYZus{}STREAM, 0);
+             bzero((char *) \PYZam{}direcc, sizeof(direcc));
+         
+             direcc.sin\PYZus{}family = AF\PYZus{}INET;
+             direcc.sin\PYZus{}port = htons(PORTNUMBER);
+             direcc.sin\PYZus{}addr.s\PYZus{}addr = htonl(INADDR\PYZus{}ANY);
+         
+             len = sizeof(struct sockaddr\PYZus{}in);
+         
+             bind(s, (struct sockaddr *) \PYZam{}direcc, len);
+         
+             listen(s, 5);
+         
+             ns = accept(s, (struct sockaddr *) \PYZam{}direcc, \PYZam{}len);
+         
+             while ((n = recv(ns, buf, sizeof(buf), 0)) \PYZgt{} 0)
+                 write(1, buf, n);
+         
+             close(ns); close(s);
+             exit(0);
+         \PYZcb{}    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Overwriting servidor.c
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{o}{!}gcc servidor.c \PYZhy{}o servidor
+\end{Verbatim}
+
+
+    \textbf{Servidor}
+
+\begin{verbatim}
+$ ./servidor 
+Hola como va?
+En un agujero en el suelo vivía un Hobbit.
+\end{verbatim}
+
+\textbf{Cliente}
+
+\begin{verbatim}
+telnet localhost 12345    
+Trying 127.0.0.1...
+Connected to localhost.
+Escape character is '^]'.
+Hola como va?
+En un agujero en el suelo vivía un Hobbit.
+^]`
+\end{verbatim}
+
+    \hypertarget{modifique-el-servidor-para-que-no-finalice.}{%
+\subsubsection{Modifique el servidor para que no
+finalice.}\label{modifique-el-servidor-para-que-no-finalice.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{writefile} servidor\PYZus{}2.c
+         \PYZsh{}include \PYZlt{}sys/types.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}sys/socket.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}netinet/in.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}unistd.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}string.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}stdlib.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}stdio.h\PYZgt{}
+         \PYZsh{}define PORTNUMBER 12345
+         int main(void)\PYZob{}
+             char buf[10];
+             int s, n, ns, len;
+             struct sockaddr\PYZus{}in direcc;
+         
+             s = socket(AF\PYZus{}INET, SOCK\PYZus{}STREAM, 0);
+             bzero((char *) \PYZam{}direcc, sizeof(direcc));
+         
+             direcc.sin\PYZus{}family = AF\PYZus{}INET;
+             direcc.sin\PYZus{}port = htons(PORTNUMBER);
+             direcc.sin\PYZus{}addr.s\PYZus{}addr = htonl(INADDR\PYZus{}ANY);
+         
+             len = sizeof(struct sockaddr\PYZus{}in);
+         
+             bind(s, (struct sockaddr *) \PYZam{}direcc, len);
+         
+             listen(s, 5);
+             while(1)\PYZob{}
+                 ns = accept(s, (struct sockaddr *) \PYZam{}direcc, \PYZam{}len);
+         
+                 while ((n = recv(ns, buf, sizeof(buf), 0)) \PYZgt{} 0)\PYZob{}
+                     write(1, buf, n);
+                 \PYZcb{}
+             \PYZcb{}
+             
+             close(ns); close(s);
+             exit(0);
+         \PYZcb{}    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Overwriting servidor\_2.c
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{o}{!}gcc servidor\PYZus{}2.c \PYZhy{}o servidor\PYZus{}2
+\end{Verbatim}
+
+
+    \hypertarget{modifique-el-servidor-para-que-el-servicio-que-presta-se-implemente-en-una-funciuxf3n-separada-del-cuerpo-principal-del-programa-main}{%
+\subsubsection{Modifique el servidor para que el servicio que presta se
+implemente en una función separada del cuerpo principal del programa
+(main())}\label{modifique-el-servidor-para-que-el-servicio-que-presta-se-implemente-en-una-funciuxf3n-separada-del-cuerpo-principal-del-programa-main}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}91}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{writefile} servidor\PYZus{}3.c
+         \PYZsh{}include \PYZlt{}sys/types.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}sys/socket.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}netinet/in.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}unistd.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}string.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}stdlib.h\PYZgt{}
+         \PYZsh{}include \PYZlt{}stdio.h\PYZgt{}
+         \PYZsh{}define PORTNUMBER 12345
+         void server\PYZus{}func(int client, char * buf, int n)\PYZob{}
+             // Envío al cliente la misma data que nos envió
+             // echo
+             write(client,buf,n);
+         \PYZcb{}
+         int main(void)\PYZob{}
+             char buf[10];
+             int s, n, ns, len;
+             struct sockaddr\PYZus{}in direcc;
+         
+             s = socket(AF\PYZus{}INET, SOCK\PYZus{}STREAM, 0);
+             bzero((char *) \PYZam{}direcc, sizeof(direcc));
+         
+             direcc.sin\PYZus{}family = AF\PYZus{}INET;
+             direcc.sin\PYZus{}port = htons(PORTNUMBER);
+             direcc.sin\PYZus{}addr.s\PYZus{}addr = htonl(INADDR\PYZus{}ANY);
+         
+             len = sizeof(struct sockaddr\PYZus{}in);
+         
+             bind(s, (struct sockaddr *) \PYZam{}direcc, len);
+         
+             listen(s, 5);
+             while(1)\PYZob{}
+                 ns = accept(s, (struct sockaddr *) \PYZam{}direcc, \PYZam{}len);
+         
+                 while ((n = recv(ns, buf, sizeof(buf), 0)) \PYZgt{} 0)\PYZob{}
+                     server\PYZus{}func(ns,buf,n);
+                 \PYZcb{}
+             \PYZcb{}
+             
+             close(ns); close(s);
+             exit(0);
+         \PYZcb{}    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Overwriting servidor\_3.c
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}90}]:} \PY{o}{!}gcc servidor\PYZus{}3.c \PYZhy{}o servidor\PYZus{}3
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{writefile} servidor\PYZus{}4.c
+        \PYZsh{}include \PYZlt{}sys/types.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}sys/socket.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}netinet/in.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}unistd.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}string.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}stdlib.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}stdio.h\PYZgt{}
+        \PYZsh{}define PORTNUMBER 12345
+        char *character\PYZus{}generator()\PYZob{}
+            static char c = 32;
+            if (c\PYZgt{}126)\PYZob{}
+                c=32;
+            \PYZcb{}
+            char *buf = malloc(sizeof(char) * 2);
+            snprintf(buf, sizeof(buf),\PYZdq{}\PYZpc{}c\PYZdq{},c++);
+            return buf;
+        \PYZcb{}
+        
+        void server\PYZus{}func(int client, char * buf, int n)\PYZob{}
+            for(int i=0;i\PYZlt{}1000;i++)\PYZob{}
+              write(client,(void*)character\PYZus{}generator(),1);
+            \PYZcb{}
+            
+        \PYZcb{}
+        int main(void)\PYZob{}
+            char buf[10];
+            int s, n, ns, len;
+            struct sockaddr\PYZus{}in direcc;
+        
+            s = socket(AF\PYZus{}INET, SOCK\PYZus{}STREAM, 0);
+            bzero((char *) \PYZam{}direcc, sizeof(direcc));
+        
+            direcc.sin\PYZus{}family = AF\PYZus{}INET;
+            direcc.sin\PYZus{}port = htons(PORTNUMBER);
+            direcc.sin\PYZus{}addr.s\PYZus{}addr = htonl(INADDR\PYZus{}ANY);
+        
+            len = sizeof(struct sockaddr\PYZus{}in);
+        
+            bind(s, (struct sockaddr *) \PYZam{}direcc, len);
+        
+            listen(s, 5);
+            while(1)\PYZob{}
+                ns = accept(s, (struct sockaddr *) \PYZam{}direcc, \PYZam{}len);
+        
+                while ((n = recv(ns, buf, sizeof(buf), 0)) \PYZgt{} 0)\PYZob{}
+                    server\PYZus{}func(ns,buf,n);
+                \PYZcb{}
+            \PYZcb{}
+            
+            close(ns); close(s);
+            exit(0);
+        \PYZcb{}    
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Overwriting servidor\_4.c
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{o}{!}gcc servidor\PYZus{}4.c \PYZhy{}o servidor\PYZus{}4
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{o}{!}./servidor\PYZus{}4
+\end{Verbatim}
+
+
+    \hypertarget{desarrolle-un-cliente-que-se-comunique-con-el-servidor}{%
+\subsection{Desarrolle un cliente que se comunique con el
+servidor}\label{desarrolle-un-cliente-que-se-comunique-con-el-servidor}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{writefile} client.c
+        \PYZsh{}include \PYZlt{}sys/socket.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}sys/types.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}netinet/in.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}netdb.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}stdio.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}string.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}stdlib.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}unistd.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}errno.h\PYZgt{}
+        \PYZsh{}include \PYZlt{}arpa/inet.h\PYZgt{} 
+        \PYZsh{}include \PYZlt{}string.h\PYZgt{} 
+        
+        \PYZsh{}define PORT 12345
+        
+        int main(int argc, char const* argv[])\PYZob{}
+        
+            int sock = 0;
+        
+            // estructura para guardar la dirección del servidor
+            struct sockaddr\PYZus{}in server\PYZus{}address;
+        
+            // buffers para escribir y leer del socket
+            char *buffer = malloc(sizeof(char) * 256);
+            char *answer = malloc(sizeof(char) * 256);
+        
+            // creamos el socket
+            sock = socket(AF\PYZus{}INET, SOCK\PYZus{}STREAM,0);
+        
+        
+            // manejo de error en la creación del socket
+            if (sock \PYZlt{} 0)\PYZob{}
+                printf(\PYZdq{}Socket no se pudo crear\PYZdq{});
+                exit(1);
+            \PYZcb{}
+        
+            // limpieza
+            bzero((char *) \PYZam{}server\PYZus{}address, sizeof(server\PYZus{}address));
+        
+        
+            // setup de la dirección y puerto del socket
+            server\PYZus{}address.sin\PYZus{}addr.s\PYZus{}addr = inet\PYZus{}addr(\PYZdq{}127.0.0.1\PYZdq{});
+            server\PYZus{}address.sin\PYZus{}family = AF\PYZus{}INET;
+            server\PYZus{}address.sin\PYZus{}port = htons(PORT);
+            // se limpia
+            memset(server\PYZus{}address.sin\PYZus{}zero, \PYZsq{}\PYZbs{}0\PYZsq{}, sizeof(server\PYZus{}address.sin\PYZus{}zero));  
+        
+            // Conexión
+            if( connect(sock, (struct sockaddr *)\PYZam{}server\PYZus{}address, sizeof(server\PYZus{}address)) \PYZlt{} 0)
+            \PYZob{}
+                printf(\PYZdq{}\PYZbs{}n Error : Connect Failed \PYZbs{}n\PYZdq{});
+                return 1;
+            \PYZcb{} 
+        
+            // Hasta EOF
+            while(fgets(buffer,256,stdin))\PYZob{}
+                // Escribo lo que tenga en buffer
+                send(sock, buffer, strlen(buffer),0);
+        
+                // Recibo del servidor
+                int valread = read(sock, answer, sizeof(answer));
+        
+                // Muestro
+                printf(\PYZdq{}\PYZpc{}s\PYZdq{},answer);
+            \PYZcb{}
+        
+            return 0;
+        \PYZcb{}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Overwriting client.c
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{o}{!}gcc client.c \PYZhy{}o client
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{o}{!}./client
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+ Error : Connect Failed 
+
+    \end{Verbatim}
+
+    \hypertarget{modificar-el-servidor-del-punto-anterior-para-que-cambie-el-servicio-por-uno-que-devuelva-la-suma-de-dos-paruxe1metros-enteros-o-una-leyenda-de-error-en-paruxe1metros-si-estos-no-son-enteros.}{%
+\subsection{Modificar el Servidor del punto anterior para que cambie el
+servicio por uno que devuelva la suma de dos parámetros enteros o una
+leyenda de error en parámetros si estos no son
+enteros.}\label{modificar-el-servidor-del-punto-anterior-para-que-cambie-el-servicio-por-uno-que-devuelva-la-suma-de-dos-paruxe1metros-enteros-o-una-leyenda-de-error-en-paruxe1metros-si-estos-no-son-enteros.}}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
