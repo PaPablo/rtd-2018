@@ -44,24 +44,30 @@ int main(int argc, char const* argv[]){
     // se limpia
     memset(server_address.sin_zero, '\0', sizeof(server_address.sin_zero));  
 
-    // Conexión
-    if( connect(sock, (struct sockaddr *)&server_address, sizeof(server_address)) < 0)
-    {
-        printf("\n Error : Connect Failed \n");
-        return 1;
-    } 
 
     // Hasta EOF
-    while(fgets(buffer,256,stdin)){
+        fgets(buffer,256,stdin);
+        // Conexión
+        if( connect(sock, (struct sockaddr *)&server_address, sizeof(server_address)) < 0)
+        {
+            printf("\n Error : Connect Failed \n");
+            return 1;
+        } 
         // Escribo lo que tenga en buffer
-        send(sock, buffer, strlen(buffer),0);
+        
+        send(sock, buffer, strlen(buffer)+1,0);
+        
+        bzero(buffer, 256);
+        bzero(answer, 256);
 
         // Recibo del servidor
-        int valread = read(sock, answer, sizeof(answer));
+        int valread = recv(sock, (void *)answer, 256,0);
 
         // Muestro
         printf("%s",answer);
-    }
+
+        close(sock);
+        
 
     return 0;
 }

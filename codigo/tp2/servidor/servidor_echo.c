@@ -28,14 +28,16 @@ int main(void){
     bind(s, (struct sockaddr *) &direcc, len);
 
     listen(s, 5);
-    while(1){
-        ns = accept(s, (struct sockaddr *) &direcc, &len);
 
-        while ((n = recv(ns, buf, sizeof(buf), 0)) > 0){
-            server_func(ns,buf,n);
-        }
+    ns = accept(s, (struct sockaddr *) &direcc, &len);
+
+    while ((n = recv(ns, buf, sizeof(buf), 0)) > 0){
+        server_func(ns,buf,n);
+        bzero(buf, sizeof(buf));
     }
+    printf("cierror\n");
     
-    close(ns); close(s);
+    close(ns)
+    close(s);
     exit(0);
 }    
